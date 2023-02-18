@@ -33,14 +33,15 @@
 
 /*personalizar el menus con las opciones*/
 
-/*stilos del input*/
-.ant-select-selector  {
-  border: 0 transparent !important;
-  border-radius: 10px !important;
-}
-/*contenedor del los elemnetos*/
-.ant-select-dropdown{
-  border-radius: 0 0 5px 5px !important;
-}
 
 /*---------------------------------*/
+::-webkit-progress-bar{
+  border-radius: 10px;
+  background-color: rgb(187, 214, 237);
+}
+
+::-webkit-progress-value{
+  border-radius: 10px;
+  background-color: #00b0e6;
+}
+

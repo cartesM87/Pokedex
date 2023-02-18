@@ -2,8 +2,10 @@ import React,{useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {getNames} from "../data/dataNames"
 import { AutoComplete } from 'antd';
-import "../styles.css"
-function Searcher() {
+import { GoSearch } from "react-icons/go";
+import "../styles.css";
+
+function Searcher({clases}) {
 
   const [names, setNames] = useState([]);
   const [inputValue, setinputValue] = useState("");
@@ -16,15 +18,20 @@ function Searcher() {
   let history=useNavigate();
   function handleSubmit(e){
     e.preventDefault();
-    history(`/pokemon/${inputValue}`)
+    !inputValue? console.error("null"):history(`/pokemon/${inputValue}`)
+
   }
+  
   /**TODO: hacer que se cambia el valor del imput al selecionar el <li></li> */
   return (
-    <form action="" onSubmit={handleSubmit} className='place-items-center bg-emerald-600 w-full grid grid-cols-1' autoComplete='off'>
-        <AutoComplete name={"buscador"} placeholder="Busca un pokemon" className='w-[200px] ' value={inputValue} onChange={setValue} options={namesFiltered.map((dt)=>({value:dt}))} />
-        <button type="submit">enviar</button>
+    <form action="" onSubmit={handleSubmit} className={`flex items-center gap-2 flex-col justify-center w-full   ${clases}`} autoComplete='off'>
+        <AutoComplete placeholder="Busca un pokemon" className='w-[200px] rounded-lg' value={inputValue} onChange={setValue} options={namesFiltered.map((dt)=>({value:dt}))} />
+        <button type="submit" className='bg-blue-600 rounded-md px-6 text-white font-semibold'>Busca</button>
+        
     </form>
   )
 }
+
+
 
 export default Searcher
