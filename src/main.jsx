@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import './index.css'
-
+import DataContext from './context/DataContext';
 
 import Home from './routes/Home'
 import Error from "./components/Error"
@@ -29,6 +29,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <DataContext>
       <RouterProvider router={router}/>
+    </DataContext>
   </React.StrictMode>
 )

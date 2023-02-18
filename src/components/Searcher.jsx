@@ -1,11 +1,12 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {getNames} from "../data/dataNames"
 import { AutoComplete } from 'antd';
-import { GoSearch } from "react-icons/go";
 import "../styles.css";
+import {dataContext} from "../context/DataContext"
 
 function Searcher({clases}) {
+
+  const {getNames} = useContext(dataContext)
 
   const [names, setNames] = useState([]);
   const [inputValue, setinputValue] = useState("");
