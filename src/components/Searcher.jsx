@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import { AutoComplete } from 'antd';
 import "../styles.css";
 import {dataContext} from "../context/DataContext"
@@ -7,6 +7,7 @@ import {dataContext} from "../context/DataContext"
 function Searcher({clases}) {
 
   const {getNames} = useContext(dataContext)
+  let {id} = useParams();
 
   const [names, setNames] = useState([]);
   const [inputValue, setinputValue] = useState("");
@@ -19,11 +20,11 @@ function Searcher({clases}) {
   let history=useNavigate();
   function handleSubmit(e){
     e.preventDefault();
-    !inputValue? console.error("null"):history(`/pokemon/${inputValue}`)
+    !inputValue? console.error("null"): !id? history(`/pokemon/${inputValue}`) : window.location.reload(history(`/pokemon/${inputValue}`))
 
   }
   
-  /**TODO: hacer que se cambia el valor del imput al selecionar el <li></li> */
+  /**TODO: hacer que el boton de buiscar solo aparezca cuando el useParams no sea undefined */
   return (
     <form action="" onSubmit={handleSubmit} className={`flex items-center gap-2 flex-col justify-center w-full   ${clases}`} autoComplete='off'>
         <AutoComplete placeholder="Busca un pokemon" className='w-[200px] rounded-lg' value={inputValue} onChange={setValue} options={namesFiltered.map((dt)=>({value:dt}))} />
