@@ -25,8 +25,9 @@ function Pokmon() {
       <Header/>
       <Searcher clases={"bg-sky-700 md:py-4"}/>
        <section className='grid grid-cols-1 place-items-center '>
-          <div>
-            <h3 className='text-4xl font-bold py-4'>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
+          <div className='py-4 text-center'>
+            <h3 className='text-4xl font-bold '>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
+            <span className='text-xl font-semibold'>#{pokeData.id}</span>
           </div>
           <Suspense fallback={<span className='loader'></span>}>
             <Image url={images} alt={pokeData.name} clas={"w-[300px]"} />
