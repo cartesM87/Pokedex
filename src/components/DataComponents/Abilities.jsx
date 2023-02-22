@@ -6,22 +6,20 @@ function Abilities({id}) {
     const {getDataPokemon} = useContext(dataContext);
     const [abilidades, setAbilidades] = useState([]);
     const [abilitesData, setAbilitesData] = useState({name:"",sprites:{},abilities:[{ability:{name:"",url:""}}]});
-
-    useEffect(()=>{
-        getDataPokemon(setAbilitesData,id);
-    },[]);
-   abilidades.slice(0,abilidades.length)
-
     
-    abilitesData.abilities.map(async(val,i)=>{
+    let updateData=async (url)=>{
         try{
-            const response = await fetch(val.ability.url);
+            const response = await fetch(url);
             const data = await response.json();
             const description =  data.flavor_text_entries.find((entry) => entry.language.name === "es").flavor_text;
            setAbilidades(abilidades => abilidades.concat(description));
         }catch(err){console.error(err)}
-        
-    })
+    }
+
+    useEffect(()=>{
+        getDataPokemon(setAbilitesData,id);
+    },[]);
+    abilitesData.abilities.map((vl)=>updateData(vl.ability.url))
 
   return (
     <div className='bg-white bg-opacity-80 rounded-xl my-7 mx-auto p-3 text-center w-[300px]'>
