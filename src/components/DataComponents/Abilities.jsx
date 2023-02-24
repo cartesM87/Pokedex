@@ -5,7 +5,7 @@ function Abilities({id}) {
 
     const {getDataPokemon} = useContext(dataContext);
     const [abilidades, setAbilidades] = useState([]);
-    const [abilitesData, setAbilitesData] = useState({name:"",sprites:{},abilities:[{ability:{name:"",url:""}}]});
+    const [abilitesData, setAbilitesData] = useState({name:"",abilities:[{ability:{name:"",url:""}}]});
     
     let updateData=async (url,i)=>{
         try{

@@ -11,8 +11,8 @@ function Estadisticas({id}) {
     let maxValues = [714,526,658,535,658,548];
     return (
 
-        <div className='grid grid-cols-1 place-items-center py-10 bg-white bg-opacity-80 rounded-2xl w-[500px] mx-auto ' >
-            <div className='flex flex-row justify-center gap-7 items-center  py-3'>
+        <div className='grid grid-cols-1 place-items-center py-8 bg-white bg-opacity-80 rounded-2xl w-[400px] md:w-[500px] mx-auto ' >
+            <div className='flex flex-row justify-center gap-7 items-center pb-3'>
                 <span className='bg-rose-600 rounded-full h-3 w-3 block'></span>
                 <h3 className='text-2xl font-bold '>Estadisticas (Base)</h3>
                 <span className='bg-rose-600 rounded-full h-3 w-3 block'></span>

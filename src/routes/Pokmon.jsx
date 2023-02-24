@@ -29,11 +29,11 @@ function Pokmon() {
 
        <section className='grid grid-cols-1  place-items-center '>
           <div className='py-4 text-center'>
-            <h3 className='text-4xl font-bold'>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
+            <h3 className='text-4xl text-slate-900 font-bold'>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
             <span className='text-xl font-semibold'>#{pokeData.id}</span>
           </div>
           <Suspense fallback={<span className='loader mx-auto'></span>}>
-            <Image url={images} alt={pokeData.name} clas={"w-[300px]"} />
+            <Image url={images} alt={pokeData.name} clas={"w-[300px] mb-[100px] md:mb-[20px]"} />
           </Suspense>
       </section>
       <Suspense fallback={<span >cargando...</span>}>
