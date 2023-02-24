@@ -11,8 +11,11 @@ function DataContext(props) {
              setPokeData(data);
              console.log(data)
              /* -- */
-            const imgResult = await fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`);
-            setImages(imgResult.url)
+            if(!setImages) ""
+            else{
+                const imgResult = await fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`);
+                setImages(imgResult.url)
+            }
         }catch(err){console.error("error catch: "+err)}
     }
     async function getNames(setNames){
@@ -24,7 +27,9 @@ function DataContext(props) {
             setNames(names);
         }catch(err){console.error("error cathc names: "+err);}
     }
-    
+
+  
+
     
   
     return <dataContext.Provider value={{getDataPokemon,getNames}} >{props.children}</dataContext.Provider>

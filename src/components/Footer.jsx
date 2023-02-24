@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 function Footer() {
   return (
-    <footer className='bg-slate-800 relative text-white font-mono bottom-0'>
+    <footer className='bg-slate-800 text-white font-mono h-[200px] text-center'>
 
         <nav>
           <Link>Aclaraciones</Link>

@@ -3,13 +3,16 @@ import {dataContext} from "../context/DataContext"
 import Header from '../components/Header';
 import Searcher from '../components/Searcher';
 import "../styles.css";
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-
+import Mobimientos from '../components/DataComponents/Mobimientos';
 function Pokmon() {
     
     const {getDataPokemon} = useContext(dataContext);
      
+    const [controler, setControler] = useState(false);
+    let secondController=()=>{setControler(!controler)};
+
     const {id} = useParams();
     const [pokeData, setPokeData] = useState({name:"",sprites:{},stats:[]});
     const [images, setImages] = useState();
@@ -23,13 +26,13 @@ function Pokmon() {
     return (
     <div className='bg-slate-600'>
       <Header/>
-      <Searcher clases={"bg-sky-700 md:py-4"}/>
-       <section className='grid grid-cols-1 place-items-center '>
+
+       <section className='grid grid-cols-1  place-items-center '>
           <div className='py-4 text-center'>
-            <h3 className='text-4xl font-bold '>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
+            <h3 className='text-4xl font-bold'>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
             <span className='text-xl font-semibold'>#{pokeData.id}</span>
           </div>
-          <Suspense fallback={<span className='loader'></span>}>
+          <Suspense fallback={<span className='loader mx-auto'></span>}>
             <Image url={images} alt={pokeData.name} clas={"w-[300px]"} />
           </Suspense>
       </section>
@@ -39,6 +42,7 @@ function Pokmon() {
       <Suspense fallback={<span>cargando...</span>}>
         <Abilities id={id}/>
       </Suspense>
+        <Mobimientos id={id}/>
       <Footer/>
     </div>
   ) 

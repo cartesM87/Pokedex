@@ -4,7 +4,7 @@ function Image({url,alt,clas}) {
   const [loading, setLoading] = useState(true);
   return (
     <>
-    {loading && <span className='loader my-[100px]'></span>}
+    {loading && <span className='loader my-[125px]'></span>}
     <img src={url} onLoad={() => setLoading(false)} className={`${clas}`} style={{ display: loading ? 'none' : 'block' }} alt={alt} />
     </>
   )
