@@ -19,8 +19,7 @@ function Searcher({clases}) {
   
   let history=useNavigate();
   function handleSubmit(e){
-    e.preventDefault();
-    !inputValue? console.error("null"): !id? history(`/pokemon/${inputValue}`) : window.location.reload(history(`/pokemon/${inputValue}`))
+    !inputValue? console.error("null"):history(`/pokemon/${inputValue}`)
 
   }
   

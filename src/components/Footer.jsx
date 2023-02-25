@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 function Footer() {
   return (
-    <footer className='bg-slate-800 text-white font-mono h-[200px] text-center'>
+    <footer className='bg-slate-800 text-white font-mono  text-center'>
 
         <nav>
-          <Link>Aclaraciones</Link>
+          <Link to={""} >Aclaraciones</Link>
         </nav>
     </footer>
   )

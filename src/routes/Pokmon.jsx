@@ -5,7 +5,7 @@ import Searcher from '../components/Searcher';
 import "../styles.css";
 import { useParams,Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import Mobimientos from '../components/DataComponents/Mobimientos';
+import Aside from '../components/DataComponents/Aside';
 function Pokmon() {
     
     const {getDataPokemon} = useContext(dataContext);
@@ -22,27 +22,32 @@ function Pokmon() {
     const Image = lazy(() => import('../components/Image'));
     const Estadisticas = lazy(()=> import("../components/DataComponents/Estadisticas"))
     const Abilities = lazy(()=> import('../components/DataComponents/Abilities'))
+    const Mobimientos = lazy(()=>import('../components/DataComponents/Mobimientos'))
 
     return (
-    <div className='bg-slate-600'>
+    <div className='bg-image-1'>
       <Header/>
-
-       <section className='grid grid-cols-1  place-items-center '>
-          <div className='py-4 text-center'>
-            <h3 className='text-4xl text-slate-900 font-bold'>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
-            <span className='text-xl font-semibold'>#{pokeData.id}</span>
-          </div>
-          <Suspense fallback={<span className='loader mx-auto'></span>}>
-            <Image url={images} alt={pokeData.name} clas={"w-[300px] mb-[100px] md:mb-[20px]"} />
-          </Suspense>
+      <Aside/>
+      <section className='md:w-auto lg:w-2/3 mx-auto lg:m-0 lg:relative lg:ml-20 bg-gray-600 bg-opacity-80  '>
+        <section className='grid grid-cols-1  place-items-center '>
+            <div className='py-4 text-center'>
+              <h3 className='text-4xl text-white text-opacity-80 font-black'>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
+              <span className='text-xl text-white text-opacity-60 font-semibold'>#{pokeData.id}</span>
+            </div>
+            <Suspense fallback={<span className='loader mx-auto'></span>}>
+              <Image url={images} alt={pokeData.name} clas={"w-[300px] mb-[100px] md:mb-[20px]"} />
+            </Suspense>
+        </section>
+        <Suspense fallback={<span >cargando...</span>}>
+          <Estadisticas id={id} /> 
+        </Suspense>
+        <Suspense fallback={<span>cargando...</span>}>
+          <Abilities id={id}/>
+        </Suspense>
+        <Suspense fallback={<span>cargando..</span>}>
+         <Mobimientos id={id}/>
+      </Suspense>
       </section>
-      <Suspense fallback={<span >cargando...</span>}>
-        <Estadisticas id={id} /> 
-      </Suspense>
-      <Suspense fallback={<span>cargando...</span>}>
-        <Abilities id={id}/>
-      </Suspense>
-        <Mobimientos id={id}/>
       <Footer/>
     </div>
   ) 

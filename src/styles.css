@@ -1,3 +1,4 @@
+
 .loader {
   width: 48px;
   height: 48px;
@@ -69,3 +70,20 @@
 }
 
 /*-----------------------------------*/
+.bg-image-1{
+  background: #252525 url("./assets/bg01.jpg") no-repeat  ;
+  background-size: cover;
+  background-attachment:fixed ;
+}
+.bg-image-2{
+  background: #252525 url("./assets/bg02.webp") no-repeat  ;
+  background-size: cover;
+  background-attachment:fixed ;
+}
+
+
+/*parallax*/
+/*background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;*/
