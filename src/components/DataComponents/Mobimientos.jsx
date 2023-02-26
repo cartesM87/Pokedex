@@ -19,9 +19,8 @@ function Mobimientos({id}) {
         const results = await fetch(url);
         const data = await results.json();
         mobments[j]= data;
-      console.log(data);
 
-        const dataDescriptions = data.flavor_text_entries.find(valor => valor.language.name==="es");
+        const dataDescriptions = data.flavor_text_entries.find(valor => valor.language.name===undefined?null:valor.language.name==="es");
         desciptions[j]=dataDescriptions.flavor_text;
 
         const namesEsp = data.names.find(valor => valor.language.name==="es")
@@ -31,7 +30,7 @@ function Mobimientos({id}) {
 
 
   return (
-    <section className='py-6 px-2 text-slate-200 md:p-0'>
+    <section className='py-6 px-2 text-slate-200 md:p-0 w-[600px] my-6 md:w-auto mx-auto'>
       <h3 className='font-black text-3xl text-center py-10 text-gray-200'>Mobimientos que {generalData.name.charAt(0).toUpperCase()+generalData.name.slice(1)} puede aprender.</h3>
       <div className='bg-gray-900 bg-opacity-90 w-auto md:w-[600px]  rounded-xl mx-auto text-center'>
       <div className='grid grid-cols-3 py-2'>

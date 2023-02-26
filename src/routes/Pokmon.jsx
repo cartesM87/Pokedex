@@ -27,8 +27,8 @@ function Pokmon() {
     return (
     <div className='bg-image-1'>
       <Header/>
-      <Aside/>
-      <section className='md:w-auto lg:w-2/3 mx-auto lg:m-0 lg:relative lg:ml-20 bg-gray-600 bg-opacity-80  '>
+      <div className='flex justify-evenly gap-2'>
+      <section className='md:w-auto w-full  lg:w-2/3 mx-auto lg:m-0 lg:relative lg:ml-20 bg-gray-600 bg-opacity-80  '>
         <section className='grid grid-cols-1  place-items-center '>
             <div className='py-4 text-center'>
               <h3 className='text-4xl text-white text-opacity-80 font-black'>{pokeData.name.charAt(0).toUpperCase()+pokeData.name.slice(1)}</h3>
@@ -45,9 +45,14 @@ function Pokmon() {
           <Abilities id={id}/>
         </Suspense>
         <Suspense fallback={<span>cargando..</span>}>
-         <Mobimientos id={id}/>
-      </Suspense>
+          <Mobimientos id={id}/>
+        </Suspense>
       </section>
+      <section className='md:flex flex-col gap-3 w-auto hidden '>
+        <Aside estilos={"bg-gray-600 w-[300px] rounded-lg  bg-opacity-80 "} component={<Searcher/>}/>
+        
+      </section>
+      </div>
       <Footer/>
     </div>
   ) 
