@@ -1,13 +1,11 @@
-import React,{useContext,useState, useEffect} from 'react';
-import {dataContext} from '../../context/DataContext';
+import React,{useState, useEffect} from 'react';
 
-function Abilities({id}) {
+function Abilities({data}) {
 
-    const {getDataPokemon} = useContext(dataContext);
     const [abilidades, setAbilidades] = useState([]);
-    const [abilitesData, setAbilitesData] = useState({name:"",abilities:[{ability:{name:"",url:""}}]});
+    const [dataGeneral, setDataGeneral] = useState({name:"",abilities:[{ability:{name:"",url:""}}]});
     
-    let updateData=async (url,i)=>{
+    let updateData=async ()=>{
         try{
             const response = await fetch(url);
             const data = await response.json();
@@ -17,12 +15,11 @@ function Abilities({id}) {
     }
 
     useEffect(()=>{
-        getDataPokemon(setAbilitesData,id);
+       setDataGeneral(data);
     },[]);
-    abilitesData.abilities.map((vl,i)=>updateData(vl.ability.url,i))
 
-  return (
-    <div className='bg-white bg-opacity-80 rounded-xl my-7 mx-auto p-3 text-center w-[300px]'>
+  return (<span>dlhj</span>
+   /*  <div className='bg-white bg-opacity-80 rounded-xl my-7 mx-auto p-3 text-center w-[300px]'>
         <div className='flex flex-row items-center justify-center gap-3 py-3'>
             <span className='bg-blue-600 rounded-full h-3 w-3 block'></span>
             <h3 className='font-bold text-xl'>Habilidades</h3>
@@ -31,7 +28,7 @@ function Abilities({id}) {
         {abilitesData.abilities.map((vl,i)=><div key={i}>
             <span className='text-black font-semibold py-1 block' >{vl.ability.name.charAt(0).toUpperCase()+vl.ability.name.slice(2)}</span>
             <p className='font-normal'>{abilidades[i]}</p></div>)}      
-        </div>
+        </div> */
   )
 }
 
