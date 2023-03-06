@@ -4,6 +4,7 @@ export let dataContext= createContext();
 
 function DataContext(props) {
   
+    /**--------------------------------------------- */
     async function getPokemon(id){
         try{
             const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -14,17 +15,29 @@ function DataContext(props) {
             return {...data,image}
         }catch(err){console.error("error catch: "+err)}
     }
+    /**--------------------------------------------- */
     const firstLeterUP= (word)=>{return word.charAt(0).toUpperCase()+word.slice(1)}
+    /**--------------------------------------------- */
     async function getNames(setNames){
-
         try{
-            const result = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
+            const result = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
             const data = await result.json();
-            let names = await data.results.map(dt=>dt.name);
+            const names = await data.results.map(dt=>dt.name.replace("-"," "));
+
             setNames(names);
         }catch(err){console.error("error cathc names: "+err);}
     }
-
+    /**--------------------------------------------- */
+    const getValuesEsp= async (url)=>{
+        try{
+            console.log(url);
+            const resp = await fetch(url);
+            const result = await resp.json();
+            const description = await result.flavor_text_entries.find(valor => valor.language.name ==="es").flavor_text;
+            const name= await result.names.find(valor => valor.language.name==="es").name
+            return {name,description}
+        }catch(e){console.error("error Esp: "+e);}
+    }
   
 
     
@@ -32,7 +45,8 @@ function DataContext(props) {
     return <dataContext.Provider value={{
         getPokemon,
         firstLeterUP,
-        getNames
+        getNames,
+        getValuesEsp
     }} >{props.children}</dataContext.Provider>
 }
 
