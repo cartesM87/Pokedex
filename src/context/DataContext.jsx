@@ -9,7 +9,6 @@ function DataContext(props) {
         try{
             const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
             const data = await result.json();
-             console.log(data)
              /* -- */
             const image = await fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`);
             return {...data,image}
@@ -23,14 +22,12 @@ function DataContext(props) {
             const result = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
             const data = await result.json();
             const names = await data.results.map(dt=>dt.name.replace("-"," "));
-
             setNames(names);
         }catch(err){console.error("error cathc names: "+err);}
     }
     /**--------------------------------------------- */
     const getValuesEsp= async (url)=>{
         try{
-            console.log(url);
             const resp = await fetch(url);
             const result = await resp.json();
             const description = await result.flavor_text_entries.find(valor => valor.language.name ==="es").flavor_text;
@@ -38,15 +35,24 @@ function DataContext(props) {
             return {name,description}
         }catch(e){console.error("error Esp: "+e);}
     }
-  
-
+    /**-------------------------------------------------- */
+    const getAttacks = async(url)=>{
+        try{
+            const resp = await fetch(url);
+            const result = await resp.json();
+            const description = await result.flavor_text_entries.find(valor => valor.language.name==="es").flavor_text;
+            const name= await result.names.find(valor => valor.language.name==="es").name;
+             return {name,description,power:result.power,accuracy:result.accuracy,class:result.damage_class.name}
+        }catch(e){console.error("error attacks: "+e);}
+    }
     
   
     return <dataContext.Provider value={{
         getPokemon,
         firstLeterUP,
         getNames,
-        getValuesEsp
+        getValuesEsp,
+        getAttacks
     }} >{props.children}</dataContext.Provider>
 }
 

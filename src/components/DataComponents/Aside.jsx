@@ -1,8 +1,8 @@
 import React from 'react'
-function Aside({component,estilos}) {
+function Aside({children,estilos}) {
   return (
     <aside className={`hidden lg:block my-3 ${estilos} `}>
-      {component}
+      {children}
     </aside>
   )
 }

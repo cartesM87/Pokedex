@@ -19,10 +19,7 @@ function Searcher({clases}) {
   
   let history=useNavigate();
   function handleSubmit(e){
-    if(inputValue!=namesFiltered){ 
-      e.preventDefault();
-      alert("wazaa")}  
-    else!inputValue? console.error("null"):history(`/pokemon/${inputValue.replace(" ","-")}`)
+    !inputValue? console.error("null"):history(`/pokemon/${inputValue.replace(" ","-")}`)
   }
   
   /**TODO: hacer que el boton de buiscar solo aparezca cuando el useParams no sea undefined */

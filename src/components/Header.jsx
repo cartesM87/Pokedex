@@ -12,13 +12,13 @@ function Header() {
 
   return (
     <header >
-        <div className='bg-gray-800 h-10  flex items-center justify-start'>
-          <button type='button' onClick={controllerD} className='md:hidden block'>
+        <div className='bg-gray-800 h-11 flex items-center justify-start md:justify-center'>
+          <button type='button' onClick={controllerD} className='md:hidden block pl-4'>
             <GoThreeBars className='text-white text-2xl'/>
           </button> 
           <Suspense  fallback={<span className='loader'></span>}>
             <Link className='px-6' to={"/"}>
-                <Img url={"/src/assets/pokelogo.png"} alt={"Logo"} clas={"img-shadow h-[40px] "} />
+                <Img url={"/src/assets/pokelogo.png"} alt={"Logo"} clas={"img-shadow w-[100px] "} />
             </Link>   
           </Suspense> 
 
