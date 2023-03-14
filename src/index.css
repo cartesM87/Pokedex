@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
+::-webkit-scrollbar{
+    @apply w-3 bg-gray-700
+}   
+::-webkit-scrollbar-thumb{
+    @apply w-auto bg-sky-700 transition duration-150
+}
+::-webkit-scrollbar-thumb:hover{
+    @apply bg-sky-800 
+}
 .button-filter{
     @apply bg-cyan-600 rounded-lg  text-white font-semibold hover:bg-sky-700 transition duration-75 mx-3 px-2
 }

@@ -8,7 +8,7 @@ function Error() {
 
   return <>
     <Header/>
-    <section className='text-center py-10'>
+    <section className='text-center h-screen py-10 bg-sky-900 text-white'>
         <span className='block text-4xl'>Oops!, ha ocurrido un error inesperado</span>
         <span className='block'>{error.statusText || error.message}</span>
     </section>

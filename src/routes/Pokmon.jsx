@@ -21,6 +21,7 @@ function Pokmon() {
     const setData=()=>{
       getPokemon(id).then(valor=>{setPokeData(valor)});
       setCharge(false)
+
     }
     /**funcion tomar abilidades en español  */
     const getEsp= ()=>{
@@ -29,7 +30,7 @@ function Pokmon() {
         .then(valor=>setAbilities(actual=>[...actual,valor]))
       })
     };
-    /**funcion para tomar los mobimientos en español */
+    /**funcion para tomar los mobimientos,y sus datos en español */
     const getMoves= ()=>{
       pokeData.moves.map((move,i)=>{
         getAttacks(move.move.url)
@@ -42,7 +43,7 @@ function Pokmon() {
       setMobmentsRendered(mobments);
     };
     const filterMobments = (clase)=>{
-      const dataFiltered= mobments.filter(actual=> actual.class ===clase)  
+      const dataFiltered= mobments.filter(actual=> actual?actual.class ===clase:"")  
       setMobmentsRendered(dataFiltered)
     };
 
@@ -51,12 +52,16 @@ function Pokmon() {
       charge?setData():""
       getEsp();
       getMoves();
+      
       window.addEventListener("blur",()=>{
-        pokeData.name?pokeData.name=="vaporeon"? document.title="En terminos de reproduccion":""
+        pokeData.name?pokeData.name=="vaporeon"? document.title="En terminos de reproduccion humano pokemon..":""
         :document.title= "El mundo pokemon aguarda"
-      });window.addEventListener("focus",()=>{document.title=firstLeterUP(pokeData.name)})
+      });
+      window.addEventListener("focus",()=>{document.title=firstLeterUP(pokeData.name)})
+     
+
     },[pokeData])
-    
+   
     
     return (
     <main className='bg-image-1'>
@@ -65,8 +70,8 @@ function Pokmon() {
       <section className='md:w-auto w-full  lg:w-2/3 mx-auto lg:m-0 lg:relative lg:ml-20 bg-black bg-opacity-30  '>
         <div className='grid grid-cols-1  place-items-center '>
           <div className='py-4 text-center'>
-            <h3 className='text-4xl text-white text-opacity-80 font-black'>{firstLeterUP(pokeData.name.replace("-"," "))}</h3>
-            <span className='text-xl text-white text-opacity-60 font-semibold'>#{pokeData.id}</span>
+            <h3 className='text-4xl text-white text-opacity-80 font-black'>{secondCharge?"Cargando nombre...": firstLeterUP(pokeData.name.replace("-"," "))}</h3>
+            <span className='text-xl text-white text-opacity-60 font-semibold'>{secondCharge?"Cargando..": "#"+pokeData.id}</span>
             <div className='text-center'>
               {pokeData.types.map((type,id)=><span className={`type ${type.type.name}`} key={id}>{firstLeterUP(type.type.name)}</span>)}
             </div>
@@ -83,7 +88,7 @@ function Pokmon() {
                 <span className='bg-rose-600 rounded-full h-3 w-3 block'></span>
             </div>
             <div>
-              {pokeData.stats.map((vl,i)=>
+              {secondCharge?<span className='loader my-6'></span> :pokeData.stats.map((vl,i)=>
                 <label htmlFor="" className='grid grid-cols-2 ' key={i}>                        
                     <span className='font-semibold text-base ' >{firstLeterUP(vl.stat.name)}</span>
                       <div className='flex items-center justify-end'>
@@ -110,23 +115,24 @@ function Pokmon() {
           <button onClick={()=>{filterMobments("special")}} className="button-filter">Especial</button>
           <button onClick={()=>{filterMobments("status")}} className="button-filter">Estado</button>
         </div>
-        <div className='text-center bg-gray-900 text-white w-[600px] mx-auto rounded-xl overflow-hidden'>
-          <div className='grid grid-cols-3 font-bold py-3 bg-gray-600'>
-                <span>Nombre</span>
-                <span>Potencia</span>
-                <span>Precisión</span>
+        {/* tabla mobimientos */}
+        <div className='text-center bg-gray-900 text-white w-auto mx-6 md:w-[600px] md:mx-auto rounded-xl overflow-hidden'>
+          <div className='grid grid-cols-3 font-bold text-lg py-3 bg-gray-600'>
+            <span>Nombre</span>
+            <span>Potencia</span>
+            <span>Precisión</span>
           </div>
           <div>
             {/* implementacion de loader */}
             {secondCharge? <span className='loader mx-auto my-10'></span>
-            : mobmentsRendered.map((attack,id)=><div className={`grid py-2 ${id%2===0?"bg-gray-900":"bg-slate-800"}`} key={id}>
+            : mobmentsRendered?mobmentsRendered.map((attack,id)=>attack.description? <div className={`grid py-2 ${id%2===0?"bg-gray-900":"bg-slate-800"}`} key={id}>
               <div className='grid grid-cols-3'>
-                <span className=''>{!attack.name?"name":attack.name}</span>
+                <span className='font-semibold'>{!attack.name?"name":attack.name}</span>
                 <span>{attack.power?attack.power:"---"}</span>
-                <span>{attack.accuracy?attack.accuracy:"Siempre"}</span>
+                <span>{attack.accuracy?attack.accuracy:"---"}</span>
               </div>
-              <p className='text-start pl-6 text-sky-600'>{attack.description?attack.description:"No se encontro descripcion en español"}</p>
-            </div>)}
+              <p className='text-start pl-6 text-sky-600'>{attack.description}</p>
+            </div>:""):""}
           </div>
           <div className='grid grid-cols-3 text-sky-600 py-4 bg-gray-600'></div>
         </div>
